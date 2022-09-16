@@ -1,0 +1,22 @@
+---
+- name: Get Device Information
+  hosts: "{{ hostlist | default('all') }}"
+  gather_facts: no
+
+  tasks:
+    - name: collect default set of facts
+      junipernetworks.junos.junos_facts:
+      register: facts_output
+
+    - name: print facts
+      debug:
+        var: facts_output
+
+#    - name: Retrieve facts from devices running Junos OS
+#      juniper.device.facts:  
+#        savedir: "{{ playbook_dir }}"
+
+#    - name: Get hardware inventory
+#      juniper.device.command:
+#        commands: "show chassis hardware"
+#        dest_dir: "{{ playbook_dir }}"
