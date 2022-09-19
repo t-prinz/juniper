@@ -1,0 +1,25 @@
+---
+- name: Set hostname
+  hosts: "{{ hostlist | default('all') }}"
+  gather_facts: no
+
+  tasks:
+    - name: Collect default set of facts
+      junipernetworks.junos.junos_facts:
+        config_format: json
+        gather_subset: config
+      register: facts_output
+
+    - name: Define the hostname
+      set_fact:
+        vsrx_hostname: "{{ aws_resource_name_prefix }}-{{ aws_instance.aws_tags.instance_hvar_basename }}"
+
+    - name: Print message
+      debug:
+        msg: "Setting hostname to: {{ vsrx_hostname }}"
+
+    - name: Ensure hostname is set
+      junipernetworks.junos.junos_hostname:
+        config:
+          hostname: "{{ vsrx_hostname }}"
+        state: overridden

@@ -4,13 +4,19 @@
   gather_facts: no
 
   tasks:
-    - name: collect default set of facts
+    - name: Collect default set of facts
       junipernetworks.junos.junos_facts:
+        config_format: json
+        gather_subset: config
       register: facts_output
 
-    - name: print facts
+    - name: Print all facts
       debug:
         var: facts_output
+
+    - name: Print system information
+      debug:
+        var: facts_output.ansible_facts.ansible_net_config.configuration.system
 
 #    - name: Retrieve facts from devices running Junos OS
 #      juniper.device.facts:  
