@@ -2,3 +2,5 @@ collections/ansible_collections
 
 roles/*
 !roles/requirements.yml
+
+backup/*

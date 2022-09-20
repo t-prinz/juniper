@@ -23,3 +23,17 @@ set system host-name aws-vsrx
 Set up interfaces
 
 set interfaces ge-0/0/0 unit 0 family inet address 10.0.2.236/24 
+set interfaces ge-0/0/1 unit 0 family inet address 10.0.3.43/24
+
+Set up security zones
+
+set security zones security-zone untrusted-public-zone interfaces ge-0/0/0.0
+set security zones security-zone trusted-private-zone interfaces ge-0/0/1.0
+
+Save a rescue configuration
+
+request system configuration rescue save
+
+Delete the rescue configuration
+
+request system configuration rescue delete

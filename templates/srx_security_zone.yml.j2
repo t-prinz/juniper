@@ -1,0 +1,22 @@
+{
+    "configuration" : {
+        "security" : {
+            "zones" : {
+                "security-zone" : [
+{% for izone in srx_security_zones %}
+                {
+                    "name" : "{{ izone.name }}", 
+                    "interfaces" : [
+{% for iface in izone.interfaces %}
+                    {
+                        "name" : "{{ iface }}"
+                    }{{ "," if not loop.last }}
+{% endfor %}
+                    ]
+                }{{ "," if not loop.last }}
+{% endfor %}
+                ]
+            }
+        }
+    }
+}

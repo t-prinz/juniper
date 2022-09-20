@@ -2,6 +2,8 @@
 - name: Configure zones
   hosts: "{{ hostlist | default('all') }}"
   gather_facts: no
+  vars:
+    temp_config_file: "./tmp_security_zone_config.json"
 
   tasks:
     - name: Collect default set of facts
@@ -12,14 +14,22 @@
 
     - name: Print message
       debug:
-        msg: "Configuring {{ item.name }} with interface {{ item.interfaces[0] }}"
+        msg: "Configuring security zone {{ item.name }}"
       with_items: "{{ srx_security_zones }}"
 
-    - name: Ensure zone is configured
-      junipernetworks.junos.junos_security_zones:
-        config:
-          zones:
-            - name: untrusted-public-zone
-              interfaces:
-                - ge-0/0/0.0
-        state: replaced
+    - name: Create security zone configuration file
+      template:
+        dest: "{{ temp_config_file }}"
+        src: templates/srx_security_zone.yml.j2
+      delegate_to: localhost
+
+    - name: Ensure zones are configured
+      junipernetworks.junos.junos_config:
+        src: "{{ temp_config_file }}"
+        src_format: json
+
+    - name: Ensure temporary configuration file is removed
+      file:
+        path: "{{ temp_config_file }}"
+        state: absent
+      delegate_to: localhost
