@@ -1,0 +1,29 @@
+{
+  "description": "",
+  "spec": [
+    {
+      "required": true,
+      "min": null,
+      "default": "",
+      "max": null,
+      "question_description": "This is the network banner text",
+      "new_question": true,
+      "variable": "net_banner",
+      "question_name": "Enter the banner text",
+      "type": "text"
+    },
+    {
+      "required": true,
+      "min": null,
+      "default": "login",
+      "max": null,
+      "question_description": "This is the type of banner to create",
+      "choices": "login\nmotd",
+      "new_question": true,
+      "variable": "net_type",
+      "question_name": "Banner type",
+      "type": "text"
+    }
+  ],
+  "name": ""
+}
