@@ -1,0 +1,31 @@
+---
+- name: Configure zones
+  hosts: "{{ hostlist | default('all') }}"
+  gather_facts: no
+  vars:
+    backup_directory: /var/tmp/backups
+
+  tasks:
+
+    - name: Collect default set of facts
+      junipernetworks.junos.junos_facts:
+        config_format: json
+        gather_subset: config
+      register: facts_output
+
+    - name: Create time stamp for play
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+      run_once: true
+
+    - name: Create configuration backup
+      junipernetworks.junos.junos_config:
+        backup: true
+        backup_options:
+          dir_path: "{{ backup_directory }}"
+          filename: "{{ inventory_hostname }}-{{ datetime }}.txt"
+      register: backup_output
+
+    - name: Print backup location
+      debug:
+        msg: "{{ inventory_hostname }} backed up to {{ backup_output.backup_path }}"
