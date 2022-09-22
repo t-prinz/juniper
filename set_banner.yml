@@ -1,0 +1,11 @@
+---
+- name: Set Juniper banner
+  hosts: "{{ hostlist | default('all') }}"
+  gather_facts: no
+
+  tasks:
+
+    - name: Add the junos banner
+      junipernetworks.junos.junos_banner:
+        text: "{{ net_banner | default(None) }}"
+        banner: "{{ net_type | default('login') }}"

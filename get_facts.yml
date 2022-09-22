@@ -16,7 +16,7 @@
 
     - name: Print system information
       debug:
-        var: facts_output.ansible_facts.ansible_net_config.configuration.system
+        var: facts_output.ansible_facts.ansible_net_config.configuration.version
 
 #    - name: Retrieve facts from devices running Junos OS
 #      juniper.device.facts:  
