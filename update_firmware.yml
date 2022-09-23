@@ -37,5 +37,6 @@
 
     - name: Wait for port 22 (ssh) to become open on the host, don't start checking for 20 seconds
       ansible.builtin.wait_for:
+        host: "{{ ansible_host }}"
         port: 22
         delay: 20
