@@ -15,9 +15,8 @@
       debug:
         msg: "Creating rescue configuration for {{ inventory_hostname }}"
 
-#    - name: configurable backup path
-#      junipernetworks.junos.junos_config:
-#        backup: true
-#        backup_options:
-#          dir_path: /tmp/
-#          filename: "{{ inventory_hostname }}.txt"
+    - name: Create rescue configuration
+      junipernetworks.junos.junos_command
+        commands:
+          - request system configuration rescue save
+#          - test configuration /config/rescue.conf.gz
