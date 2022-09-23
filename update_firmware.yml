@@ -1,0 +1,18 @@
+---
+- name: Update firmware
+  hosts: "{{ hostlist | default('all') }}"
+  gather_facts: no
+  vars:
+    temp_config_file: "./tmp_security_zone_config.json"
+
+  tasks:
+    - name: Collect default set of facts
+      junipernetworks.junos.junos_facts:
+        config_format: json
+        gather_subset: config
+      register: facts_output
+
+    - name: Print message
+      debug:
+        msg: "Updating firmware for {{ inventory_hostname }}"
+
