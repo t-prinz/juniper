@@ -16,7 +16,7 @@
         msg: "Creating rescue configuration for {{ inventory_hostname }}"
 
     - name: Create rescue configuration
-      junipernetworks.junos.junos_command
+      junipernetworks.junos.junos_command:
         commands:
           - request system configuration rescue save
 #          - test configuration /config/rescue.conf.gz
