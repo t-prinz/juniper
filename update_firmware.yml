@@ -2,7 +2,11 @@
 - name: Update firmware
   hosts: "{{ hostlist | default('all') }}"
   gather_facts: no
+  max_fail_percentage: 0
   vars:
+    firmware_src_location: "/var/tmp/install/"
+    firmware_name: "junos-srxsme-10.0R2-domestic.tgz"
+    firmware_dst_location: "/var/tmp/"
     temp_config_file: "./tmp_security_zone_config.json"
 
   tasks:
@@ -17,3 +21,21 @@
       debug:
         msg: "Updating firmware for {{ inventory_hostname }}"
 
+#    - name: Copy firmware file to host
+#      junipernetworks.junos.junos_command:
+#        commands:
+#          - "file copy {{ firmware_src_location }}{{ firmware_name }} {{ firmware_name }}"
+
+#    - name: Install firmware
+#      junipernetworks.junos.junos_command:
+#        commands:
+#          - "request system software add {{ firmware_dst_location }}{{ firmware_name }} no-copy"
+
+    - name: Reboot system
+      junipernetworks.junos.junos_command:
+        commands: request system reboot
+
+    - name: Wait for port 22 (ssh) to become open on the host, don't start checking for 20 seconds
+      ansible.builtin.wait_for:
+        port: 22
+        delay: 20
