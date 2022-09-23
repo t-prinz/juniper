@@ -1,5 +1,5 @@
 ---
-- name: Delete rescue configuration
+- name: Rollback to the previous configuration
   hosts: "{{ hostlist | default('all') }}"
   gather_facts: no
 
@@ -13,9 +13,8 @@
 
     - name: Print message
       debug:
-        msg: "Deleting rescue configuration for {{ inventory_hostname }}"
+        msg: "Rolling back to the previous configuration on {{ inventory_hostname }}"
 
-    - name: Delete rescue configuration
-      junipernetworks.junos.junos_command:
-        commands:
-          - request system configuration rescue delete
+    - name: Rollback to the previous configuration
+      junipernetworks.junos.junos_config:
+        rollback: 1
