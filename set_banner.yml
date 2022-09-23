@@ -5,6 +5,12 @@
 
   tasks:
 
+    - name: Collect default set of facts
+      junipernetworks.junos.junos_facts:
+        config_format: json
+        gather_subset: config
+      register: facts_output
+
     - name: Add the junos banner
       junipernetworks.junos.junos_banner:
         text: "{{ net_banner | default(None) }}"

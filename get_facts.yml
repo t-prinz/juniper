@@ -4,6 +4,7 @@
   gather_facts: no
 
   tasks:
+
     - name: Collect default set of facts
       junipernetworks.junos.junos_facts:
         config_format: json

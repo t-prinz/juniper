@@ -6,6 +6,7 @@
     temp_config_file: "./tmp_security_zone_config.json"
 
   tasks:
+
     - name: Collect default set of facts
       junipernetworks.junos.junos_facts:
         config_format: json

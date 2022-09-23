@@ -4,7 +4,7 @@
     {
       "required": true,
       "min": null,
-      "default": "",
+      "default": "This system managed by Ansible",
       "max": null,
       "question_description": "This is the network banner text",
       "new_question": true,
