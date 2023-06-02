@@ -45,6 +45,13 @@ Delete the rescue configuration
 
 `request system configuration rescue delete`
 
+Other helpful references
+
+- [Ansible for Junos OS Developer Guide](https://www.juniper.net/documentation/us/en/software/junos-ansible/ansible/index.html)
+- [Security Policies User Guide for Security Devices](https://www.juniper.net/documentation/us/en/software/junos/security-policies/topics/topic-map/security-zone-configuration.html)
+- [SRX Getting Started - Configure Interfaces and Security Zones](https://supportportal.juniper.net/s/article/SRX-Getting-Started-Configure-Interfaces-and-Security-Zones?language=en_US#techdoc)
+- [Junos OS Evolved Software Installation and Upgrade Guide](https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade-evo/index.html)
+
 [^1]: https://www.juniper.net/documentation/us/en/software/junos/netconf/topics/topic-map/netconf-ssh-connection.html#d10e304
 [^2]: https://www.juniper.net/documentation/us/en/software/junos/netconf/topics/task/netconf-session-connecting-to-server.html
 [^3]: https://www.juniper.net/documentation/us/en/software/junos-ansible/ansible/topics/task/junos-ansible-connection-errors-troubleshooting.html
